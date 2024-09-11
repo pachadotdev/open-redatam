@@ -49,36 +49,37 @@ Ticked = Passed; Blank = Failed
 
 DIC files
 
-- [ ] Argentina 2010 (`downloads/CP2010ARG/BASE_AMP_DPTO/CPV2010Ampliado.dic) *CORRUPT FILE*
-- [ ] Bolivia 2001 CELADE (`downloads/CP2001BOL/Cp2001BOL/Celade/CPV2001BOL_Celade.dic`) *CORRUPT FILE*
-- [x] Bolivia 2012 (`downloads/CP2012BOL/BaseMunicipio_V3/CPV2012Municipio.dic`)
-- [x] Chile 2017 (`downloads/CP2017CHL/BaseOrg16/CPV2017-16.dic`)
-- [x] Dominican Republic 2002 (`downloads/CP2002DOM/Cp2002DOM/BaseOriginal/CPV2002DOM.dic`)
-- [x] Ecuador 2010 (`downloads/CP2010ECU/Base/CE11.dic`)
-- [x] El Salvador 2007 (`downloads/CP2007SLV/CP2007SLV/BaseTotal/CPV2007ES.dic`)
-- [x] Guatemala 2018 (`downloads/CP2018GTM/BasePub/CPV2018GT_BasePublica.dic`)
-- [x] Mexico 2000 (`downloads/CP2000MEX/Cp2000MEX/BaseOriginal/cpmx2000.dic`)
-- [x] Mexico 2010 (`downloads/CP2010MEX/BasePubM/MC10.dic`)
-- [x] Myanmar 2014 (`downloads/CP2014MMR/Union.dic`)
-- [ ] Peru 2010 (`downloads/CP2010PER/CP2007PER/BasePub/CPV2007PER_PUB.dic`) *CORRUPT FILE*
-- [ ] Peru 2010 (`downloads/CP2010PER/CP2007PER/BasePub/CPV2007PER_PUB.dic`) *CORRUPT FILE*
-- [ ] Peru 2017 (`downloads/CP2017PER/BaseD/BaseR/CPVPER2017D.dic`) *CORRUPT FILE*
-- [ ] Uruguay 2011 (`downloads/CP2011URY/BaseRPub/CPV2011_uruguay_publica.dic`) *CORRUPT FILE*
+- [ ] Argentina 2010 (`CP2010ARG/BASE_AMP_DPTO/CPV2010Ampliado.dic`) *CORRUPT FILE*
+- [ ] Bolivia 2001 CELADE (`CP2001BOL/Cp2001BOL/Celade/CPV2001BOL_Celade.dic`) *CORRUPT FILE*
+- [x] Bolivia 2012 (`CP2012BOL/BaseMunicipio_V3/CPV2012Municipio.dic`)
+- [x] Chile 2017 (`CP2017CHL/BaseOrg16/CPV2017-16.dic`)
+- [x] Dominican Republic 2002 (`CP2002DOM/Cp2002DOM/BaseOriginal/CPV2002DOM.dic`)
+- [x] Ecuador 2010 (`CP2010ECU/Base/CE11.dic`)
+- [x] El Salvador 2007 (`CP2007SLV/CP2007SLV/BaseTotal/CPV2007ES.dic`)
+- [x] Guatemala 2018 (`CP2018GTM/BasePub/CPV2018GT_BasePublica.dic`)
+- [x] Mexico 2000 (`CP2000MEX/Cp2000MEX/BaseOriginal/cpmx2000.dic`)
+- [x] Mexico 2010 (`CP2010MEX/BasePubM/MC10.dic`)
+- [x] Myanmar 2014 (`CP2014MMR/Union.dic`)
+- [ ] Peru 2010 (`CP2010PER/CP2007PER/BasePub/CPV2007PER_PUB.dic`) *CORRUPT FILE*
+- [ ] Peru 2010 (`CP2010PER/CP2007PER/BasePub/CPV2007PER_PUB.dic`) *CORRUPT FILE*
+- [ ] Peru 2017 (`CP2017PER/BaseD/BaseR/CPVPER2017D.dic`) *CORRUPT FILE*
+- [ ] Uruguay 2011 (`CP2011URY/BaseRPub/CPV2011_uruguay_publica.dic`) *CORRUPT FILE*
 
 DICX files
 
-- [x] Argentina 2010 (`downloads/CP2010ARG/BASE_AMP_DPTO/CPV2010Ampliado.dicx`)
-- [ ] Bolivia 2001 (`downloads/CP2001BOL/Cp2001BOL/BaseOriginal/CPV2001.dicx`)
-- [ ] Bolivia 2001 CELADE (`downloads/CP2001BOL/Cp2001BOL/Celade/CPV2001BOL_Celade.dicx`)
-- [x] Bolivia 2012 (`downloads/CP2012BOL/BaseMunicipio_V3/CPV2012Comunidad.dicx`)
-- [x] Chile 2017 (`downloads/CP2017CHL/BaseOrg16/CPV2017-16.dicx`)
-- [x] Dominican Republic 2002 (`downloads/CP2002DOM/Cp2002DOM/BaseOriginal/CPV2002DOM.dicx`)
-- [x] Ecuador 2010 (`downloads/CP2010ECU/Base/cpv2010ecu.dicx`)
-- [x] El Salvador 2007 (`downloads/CP2007SLV/CP2007SLV/BaseTotal/CPV2007ES.dicx`)
-- [x] Mexico 2000 (`downloads/CP2000MEX/Cp2000MEX/BaseOriginal/cpmx2000.dicx`)
-- [x] Mexico 2010 (`downloads/CP2010MEX/BasePubM/MC10.dicx`)
-- [ ] Mexico 2010 CELADE (`downloads/CP2000MEX/Cp2000MEX/Celade/CPV2000MEX_Celade.dicx`)
-- [x] Peru 2010 (`downloads/CP2010PER/CP2007PER/BasePub/CPV2007PER_PUB.dicx`)
+- [x] Argentina 2010 (`CP2010ARG/BASE_AMP_DPTO/CPV2010Ampliado.dicx`)
+- [ ] Bolivia 2001 (`CP2001BOL/Cp2001BOL/BaseOriginal/CPV2001.dicx`)
+- [ ] Bolivia 2001 CELADE (`CP2001BOL/Cp2001BOL/Celade/CPV2001BOL_Celade.dicx`)
+- [x] Bolivia 2012 (`CP2012BOL/BaseMunicipio_V3/CPV2012Comunidad.dicx`)
+- [x] Chile 2017 (`CP2017CHL/BaseOrg16/CPV2017-16.dicx`)
+- [x] Dominican Republic 2002 (`CP2002DOM/Cp2002DOM/BaseOriginal/CPV2002DOM.dicx`)
+- [x] Ecuador 2010 (`CP2010ECU/Base/cpv2010ecu.dicx`)
+- [x] El Salvador 2007 (`CP2007SLV/CP2007SLV/BaseTotal/CPV2007ES.dicx`)
+- [x] Mexico 2000 (`CP2000MEX/Cp2000MEX/BaseOriginal/cpmx2000.dicx`)
+- [x] Mexico 2010 (`CP2010MEX/BasePubM/MC10.dicx`)
+- [ ] Mexico 2010 CELADE (`CP2000MEX/Cp2000MEX/Celade/CPV2000MEX_Celade.dicx`)
+- [x] Peru 2010 (`CP2010PER/CP2007PER/BasePub/CPV2007PER_PUB.dicx`)
+- [x] Uruguay 2011 (`CP2011URY/BaseRPub/CPV2011_uruguay_publica.dicX`)
 
 ## Credits
 

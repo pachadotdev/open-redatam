@@ -33,9 +33,13 @@ jobs:
         if: matrix.os == 'macos-latest'
         run: brew install make wget
 
-      - name: Install Visual Studio Build Tools
+      - name: Install Visual Studio 2019
         if: matrix.os == 'windows-latest'
-        uses: microsoft/setup-msbuild@v1.0.2
+        uses: microsoft/setup-visual-studio@v1
+        with:
+          visual-studio-version: '2019'
+          channel: 'release'
+          include-recommended: true
 
       - name: Install Xerces on Ubuntu
         if: matrix.os == 'ubuntu-22.04'
