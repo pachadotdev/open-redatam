@@ -1,0 +1,138 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up environment
+        if: matrix.os == 'ubuntu-22.04'
+        run: sudo apt-get update && sudo apt-get install -y build-essential wget
+
+      - name: Set up environment
+        if: matrix.os == 'windows-latest'
+        run: choco install make wget
+
+      - name: Set up environment
+        if: matrix.os == 'macos-latest'
+        run: brew install make wget
+
+      - name: Install Xerces on Ubuntu
+        if: matrix.os == 'ubuntu-22.04'
+        run: |
+          chmod +x dev/01-install-xerces.sh
+          ./dev/01-install-xerces.sh
+
+      - name: Install Xerces on Windows
+        if: matrix.os == 'windows-latest'
+        run: |
+          wget https://archive.apache.org/dist/xerces/c/3/sources/xerces-c-3.2.3.zip
+          tar -xf xerces-c-3.2.3.zip
+          cd xerces-c-3.2.3
+          mkdir build
+          cd build
+          cmake -G "Visual Studio 16 2019" ..
+          cmake --build . --config Release
+          cmake --install . --prefix ../xerces
+
+      - name: Install Xerces on macOS
+        if: matrix.os == 'macos-latest'
+        run: |
+          chmod +x dev/01-install-xerces.sh
+          ./dev/01-install-xerces.sh
+
+      - name: Build redatam and redatamgui
+        run: make all
+
+      - name: Archive binaries
+        if: matrix.os == 'ubuntu-22.04'
+        run: tar -czvf redatam-linux.tar.gz redatam redatamgui
+
+      - name: Archive binaries
+        if: matrix.os == 'windows-latest'
+        run: zip redatam-windows.zip redatam.exe redatamgui.exe
+
+      - name: Archive binaries
+        if: matrix.os == 'macos-latest'
+        run: tar -czvf redatam-macos.tar.gz redatam redatamgui
+
+      - name: Upload binaries
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.os }}-binaries
+          path: |
+            redatam-linux.tar.gz
+            redatam-windows.zip
+            redatam-macos.tar.gz
+
+  release:
+    needs: build
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: ubuntu-22.04-binaries
+          path: ./binaries/linux
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: windows-latest-binaries
+          path: ./binaries/windows
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: macos-latest-binaries
+          path: ./binaries/macos
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Linux binaries
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./binaries/linux/redatam-linux.tar.gz
+          asset_name: redatam-linux.tar.gz
+          asset_content_type: application/gzip
+
+      - name: Upload Windows binaries
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./binaries/windows/redatam-windows.zip
+          asset_name: redatam-windows.zip
+          asset_content_type: application/zip
+
+      - name: Upload macOS binaries
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./binaries/macos/redatam-macos.tar.gz
+          asset_name: redatam-macos.tar.gz
+          asset_content_type: application/gzip
