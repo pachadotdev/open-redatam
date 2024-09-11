@@ -39,14 +39,15 @@ jobs:
           chmod +x dev/01-install-xerces.sh
           ./dev/01-install-xerces.sh
 
-      - name: Configure and Build Xerces on Windows
+      - name: Install Xerces on Windows
         if: matrix.os == 'windows-latest'
-        uses: lukka/run-cmake@v3
-        with:
-          cmakeListsOrSettingsJson: 'xerces-c-3.2.3/CMakeLists.txt'
-          buildDirectory: 'xerces-c-3.2.3/build'
-          cmakeBuildType: 'Release'
-          cmakeAppendedArgs: '--install-prefix ../xerces'
+        run: |
+          wget https://archive.apache.org/dist/xerces/c/3/sources/xerces-c-3.2.3.zip
+          tar -xf xerces-c-3.2.3.zip
+          cd xerces-c-3.2.3
+          ./configure
+          make
+          make install
 
       - name: Install Xerces on macOS
         if: matrix.os == 'macos-latest'
@@ -60,11 +61,7 @@ jobs:
 
       - name: Build redatam and redatamgui on Windows
         if: matrix.os == 'windows-latest'
-        uses: lukka/run-cmake@v3
-        with:
-          cmakeListsOrSettingsJson: 'CMakeListsTxtPath'
-          buildDirectory: 'build'
-          cmakeBuildType: 'Release'
+        run: make all
 
       - name: Build redatam and redatamgui on macOS
         if: matrix.os == 'macos-latest'
