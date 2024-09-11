@@ -33,14 +33,6 @@ jobs:
         if: matrix.os == 'macos-latest'
         run: brew install make wget
 
-      - name: Install Visual Studio 2019
-        if: matrix.os == 'windows-latest'
-        uses: microsoft/setup-visual-studio@v1
-        with:
-          visual-studio-version: '2019'
-          channel: 'release'
-          include-recommended: true
-
       - name: Install Xerces on Ubuntu
         if: matrix.os == 'ubuntu-22.04'
         run: |
@@ -65,7 +57,20 @@ jobs:
           chmod +x dev/01-install-xerces.sh
           ./dev/01-install-xerces.sh
 
-      - name: Build redatam and redatamgui
+      - name: Build redatam and redatamgui on Ubuntu
+        if: matrix.os == 'ubuntu-22.04'
+        run: make all
+
+      - name: Build redatam and redatamgui on Windows
+        if: matrix.os == 'windows-latest'
+        run: |
+          mkdir build
+          cd build
+          cmake -G "Visual Studio 16 2019" ..
+          cmake --build . --config Release
+
+      - name: Build redatam and redatamgui on macOS
+        if: matrix.os == 'macos-latest'
         run: make all
 
       - name: Archive binaries on Ubuntu
