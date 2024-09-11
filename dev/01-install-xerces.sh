@@ -17,7 +17,12 @@ wget https://dlcdn.apache.org/xerces/c/3/sources/xerces-c-3.2.5.tar.gz.sha256 -O
 echo "Checking the hash..."
 
 CHECKSUM=$(cat downloads/xerces-c-3.2.5.tar.gz.sha256 | awk '{print $1}')
-echo "$CHECKSUM  downloads/xerces-c-3.2.5.tar.gz" | sha256sum -c -
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  echo "$CHECKSUM  downloads/xerces-c-3.2.5.tar.gz" | shasum -a 256 -c -
+else
+  echo "$CHECKSUM  downloads/xerces-c-3.2.5.tar.gz" | sha256sum -c -
+fi
 
 if [ $? -eq 0 ]; then
   echo "Hash matched!"
