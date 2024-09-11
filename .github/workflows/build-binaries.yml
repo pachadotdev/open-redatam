@@ -39,17 +39,14 @@ jobs:
           chmod +x dev/01-install-xerces.sh
           ./dev/01-install-xerces.sh
 
-      - name: Install Xerces on Windows
+      - name: Configure and Build Xerces on Windows
         if: matrix.os == 'windows-latest'
-        run: |
-          wget https://archive.apache.org/dist/xerces/c/3/sources/xerces-c-3.2.3.zip
-          tar -xf xerces-c-3.2.3.zip
-          cd xerces-c-3.2.3
-          mkdir build
-          cd build
-          cmake -G "Visual Studio 16 2019" ..
-          cmake --build . --config Release
-          cmake --install . --prefix ../xerces
+        uses: lukka/run-cmake@v3
+        with:
+          cmakeListsOrSettingsJson: 'xerces-c-3.2.3/CMakeLists.txt'
+          buildDirectory: 'xerces-c-3.2.3/build'
+          cmakeBuildType: 'Release'
+          cmakeAppendedArgs: '--install-prefix ../xerces'
 
       - name: Install Xerces on macOS
         if: matrix.os == 'macos-latest'
@@ -63,11 +60,11 @@ jobs:
 
       - name: Build redatam and redatamgui on Windows
         if: matrix.os == 'windows-latest'
-        run: |
-          mkdir build
-          cd build
-          cmake -G "Visual Studio 16 2019" ..
-          cmake --build . --config Release
+        uses: lukka/run-cmake@v3
+        with:
+          cmakeListsOrSettingsJson: 'CMakeListsTxtPath'
+          buildDirectory: 'build'
+          cmakeBuildType: 'Release'
 
       - name: Build redatam and redatamgui on macOS
         if: matrix.os == 'macos-latest'
@@ -157,4 +154,3 @@ jobs:
           asset_path: ./binaries/macos/redatam-macos.tar.gz
           asset_name: redatam-macos.tar.gz
           asset_content_type: application/gzip
-          
