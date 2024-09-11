@@ -68,7 +68,7 @@ jobs:
         run: tar -czvf redatam-macos.tar.gz redatam redatamgui
 
       - name: Upload binaries
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.os }}-binaries
           path: |
@@ -81,17 +81,17 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: ubuntu-22.04-binaries
           path: ./binaries/linux
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: windows-latest-binaries
           path: ./binaries/windows
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: macos-latest-binaries
           path: ./binaries/macos
@@ -136,3 +136,4 @@ jobs:
           asset_path: ./binaries/macos/redatam-macos.tar.gz
           asset_name: redatam-macos.tar.gz
           asset_content_type: application/gzip
+          
