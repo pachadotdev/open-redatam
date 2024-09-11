@@ -16,15 +16,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up environment
+      - name: Set up environment on Ubuntu
         if: matrix.os == 'ubuntu-22.04'
         run: sudo apt-get update && sudo apt-get install -y build-essential wget
 
-      - name: Set up environment
+      - name: Set up environment on Windows
         if: matrix.os == 'windows-latest'
         run: choco install make wget
 
-      - name: Set up environment
+      - name: Set up environment on macOS
         if: matrix.os == 'macos-latest'
         run: brew install make wget
 
@@ -55,20 +55,20 @@ jobs:
       - name: Build redatam and redatamgui
         run: make all
 
-      - name: Archive binaries
+      - name: Archive binaries on Ubuntu
         if: matrix.os == 'ubuntu-22.04'
         run: tar -czvf redatam-linux.tar.gz redatam redatamgui
 
-      - name: Archive binaries
+      - name: Archive binaries on Windows
         if: matrix.os == 'windows-latest'
         run: zip redatam-windows.zip redatam.exe redatamgui.exe
 
-      - name: Archive binaries
+      - name: Archive binaries on macOS
         if: matrix.os == 'macos-latest'
         run: tar -czvf redatam-macos.tar.gz redatam redatamgui
 
       - name: Upload binaries
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.os }}-binaries
           path: |
@@ -81,17 +81,17 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: ubuntu-22.04-binaries
           path: ./binaries/linux
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: windows-latest-binaries
           path: ./binaries/windows
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: macos-latest-binaries
           path: ./binaries/macos
