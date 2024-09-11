@@ -1,5 +1,11 @@
 downloads
+lib
+obj
 xerces
 *.gz
 *.sha256
 redatam
+redatamgui
+.vscode/settings.json
+.vscode/launch.json
+.vscode/c_cpp_properties.json
