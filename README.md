@@ -82,8 +82,6 @@ DICX files
 
 ## Credits
 
-This Redatam Converter was created and is supported by Lital Barkai (barkailital@gmail.com).
+This Redatam Converter was created and is supported by Lital Barkai (barkailital@gmail.com) and Mauricio "Pacha" Vargas Sepulveda (m.sepulveda@mail.utoronto.ca).
 
 The original converter was created by [Pablo De Grande](https://github.com/discontinuos). See [here](https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0186-72102016000300811) for more information.
-
-The tests and installation instructions were created by Mauricio "Pacha" Vargas Sepulveda (m.sepulveda@mail.utoronto.ca)
