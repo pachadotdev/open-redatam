@@ -39,15 +39,25 @@ jobs:
           chmod +x dev/01-install-xerces.sh
           ./dev/01-install-xerces.sh
 
+      - name: Install MSYS2
+        if: matrix.os == 'windows-latest'
+        run: choco install msys2
+
+      - name: Set up MSYS2
+        if: matrix.os == 'windows-latest'
+        run: |
+          ridk install 3
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm base-devel mingw-w64-x86_64-toolchain
+
       - name: Install Xerces on Windows
         if: matrix.os == 'windows-latest'
         run: |
           wget https://archive.apache.org/dist/xerces/c/3/sources/xerces-c-3.2.3.zip
           tar -xf xerces-c-3.2.3.zip
           cd xerces-c-3.2.3
-          ./configure
-          make
-          make install
+          msys2_shell.cmd -defterm -no-start -here -c "bash -lc './configure --prefix=$(pwd)/../xerces && make -j8 && make install'"
+          cd ..
 
       - name: Install Xerces on macOS
         if: matrix.os == 'macos-latest'
