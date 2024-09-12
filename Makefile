@@ -8,8 +8,8 @@ LIB_DIR = lib
 # Compiler and linker
 # use the 1st CXXFLAGS for release and the 2nd for debug
 CXX = g++
-# CXXFLAGS = -std=c++17 -g -O3 -Wall -I ./include -I ./include/entities -I ./include/readers -I ./include/exporters -I $(XERCES_PATH)include/ `wx-config --cxxflags`
-CXXFLAGS = -std=c++17 -g -O0 -Wall -I ./include -I ./include/entities -I ./include/readers -I ./include/exporters -I $(XERCES_PATH)include/ `wx-config --cxxflags`
+CXXFLAGS = -std=c++17 -g -O3 -Wall -I ./include -I ./include/entities -I ./include/readers -I ./include/exporters -I $(XERCES_PATH)include/ `wx-config --cxxflags`
+# CXXFLAGS = -std=c++17 -g -O0 -Wall -I ./include -I ./include/entities -I ./include/readers -I ./include/exporters -I $(XERCES_PATH)include/ `wx-config --cxxflags`
 LDFLAGS = `wx-config --libs` -pthread
 
 # Xerces flags
