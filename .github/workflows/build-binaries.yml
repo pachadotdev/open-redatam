@@ -39,9 +39,20 @@ jobs:
           chmod +x dev/01-install-xerces.sh
           ./dev/01-install-xerces.sh
 
+      - name: Download MSYS2
+        if: matrix.os == 'windows-latest'
+        run: |
+          curl -L -o msys2.exe https://repo.msys2.org/distrib/x86_64/msys2-x86_64-20210725.exe
+
       - name: Install MSYS2
         if: matrix.os == 'windows-latest'
-        run: choco install msys2
+        run: msys2.exe --quiet-mode --root C:\msys64
+
+      - name: Set up MSYS2
+        if: matrix.os == 'windows-latest'
+        run: |
+          C:\msys64\usr\bin\bash -lc "pacman -Syu --noconfirm"
+          C:\msys64\usr\bin\bash -lc "pacman -S --noconfirm base-devel mingw-w64-x86_64-toolchain"
 
       - name: Set up MSYS2
         if: matrix.os == 'windows-latest'
