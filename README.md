@@ -72,10 +72,10 @@ DICX files
 - [ ] Bolivia 2001 CELADE (`CP2001BOL/Cp2001BOL/Celade/CPV2001BOL_Celade.dicx`)
 - [x] Bolivia 2012 (`CP2012BOL/BaseMunicipio_V3/CPV2012Comunidad.dicx`)
 - [x] Chile 2017 (`CP2017CHL/BaseOrg16/CPV2017-16.dicx`)
-- [x] Dominican Republic 2002 (`CP2002DOM/Cp2002DOM/BaseOriginal/CPV2002DOM.dicx`)
-- [x] Ecuador 2010 (`CP2010ECU/Base/cpv2010ecu.dicx`)
+- [x] Dominican Republic 2002 (`CP2002DOM/Cp2002DOM/BaseOriginal/CPV2002DOM.dicx`) 
+- [x] Ecuador 2010 (`CP2010ECU/Base/cpv2010ecu.dicx`) *This file doesn't work with the original Redatam Converter, it says "An error ocurred while discovering the dictionary entities (Inconsistent type declaration).*"
 - [x] El Salvador 2007 (`CP2007SLV/CP2007SLV/BaseTotal/CPV2007ES.dicx`)
-- [x] Mexico 2000 (`CP2000MEX/Cp2000MEX/BaseOriginal/cpmx2000.dicx`)
+- [x] Mexico 2000 (`CP2000MEX/Cp2000MEX/BaseOriginal/cpmx2000.dicx`) *This file doesn't work with the original Redatam Converter, it says "An error ocurred while discovering the dictionary entities (Inconsistent type declaration).*"
 - [x] Mexico 2010 (`CP2010MEX/BasePubM/MC10.dicx`)
 - [ ] Mexico 2010 CELADE (`CP2000MEX/Cp2000MEX/Celade/CPV2000MEX_Celade.dicx`)
 - [x] Peru 2010 (`CP2010PER/CP2007PER/BasePub/CPV2007PER_PUB.dicx`)

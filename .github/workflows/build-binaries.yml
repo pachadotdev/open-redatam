@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-22.04, windows-latest, macos-latest]
+        os: [ubuntu-22.04, macos-latest]
 
     steps:
       - name: Checkout code
@@ -23,52 +23,19 @@ jobs:
 
       - name: Set up environment on Ubuntu
         if: matrix.os == 'ubuntu-22.04'
-        run: sudo apt-get update && sudo apt-get install -y build-essential wget
-
-      - name: Set up environment on Windows
-        if: matrix.os == 'windows-latest'
-        run: choco install make wget
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential wget mingw-w64 libwxgtk3.0-gtk3-dev
 
       - name: Set up environment on macOS
         if: matrix.os == 'macos-latest'
-        run: brew install make wget
+        run: brew install make wget wxwidgets
 
       - name: Install Xerces on Ubuntu
         if: matrix.os == 'ubuntu-22.04'
         run: |
           chmod +x dev/01-install-xerces.sh
           ./dev/01-install-xerces.sh
-
-      - name: Download MSYS2
-        if: matrix.os == 'windows-latest'
-        run: |
-          curl -L -o msys2.exe https://repo.msys2.org/distrib/x86_64/msys2-x86_64-20210725.exe
-
-      - name: Install MSYS2
-        if: matrix.os == 'windows-latest'
-        run: msys2.exe --quiet-mode --root C:\msys64
-
-      - name: Set up MSYS2
-        if: matrix.os == 'windows-latest'
-        run: |
-          C:\msys64\usr\bin\bash -lc "pacman -Syu --noconfirm"
-          C:\msys64\usr\bin\bash -lc "pacman -S --noconfirm base-devel mingw-w64-x86_64-toolchain"
-
-      - name: Set up MSYS2
-        if: matrix.os == 'windows-latest'
-        run: |
-          ridk install 3
-          pacman -Syu --noconfirm
-          pacman -S --noconfirm base-devel mingw-w64-x86_64-toolchain
-
-      - name: Install Xerces on Windows
-        if: matrix.os == 'windows-latest'
-        run: |
-          wget https://archive.apache.org/dist/xerces/c/3/sources/xerces-c-3.2.3.zip
-          tar -xf xerces-c-3.2.3.zip
-          cd xerces-c-3.2.3
-          msys2_shell.cmd -defterm -no-start -here -c "bash -lc './configure --prefix=$(pwd)/../xerces && make -j8 && make install'"
-          cd ..
 
       - name: Install Xerces on macOS
         if: matrix.os == 'macos-latest'
@@ -80,21 +47,19 @@ jobs:
         if: matrix.os == 'ubuntu-22.04'
         run: make all
 
-      - name: Build redatam and redatamgui on Windows
-        if: matrix.os == 'windows-latest'
-        run: make all
-
       - name: Build redatam and redatamgui on macOS
         if: matrix.os == 'macos-latest'
         run: make all
 
+      - name: Build Windows executables on Ubuntu
+        if: matrix.os == 'ubuntu-22.04'
+        run: make -f Makefile.win
+
       - name: Archive binaries on Ubuntu
         if: matrix.os == 'ubuntu-22.04'
-        run: tar -czvf redatam-linux.tar.gz redatam redatamgui
-
-      - name: Archive binaries on Windows
-        if: matrix.os == 'windows-latest'
-        run: zip redatam-windows.zip redatam.exe redatamgui.exe
+        run: |
+          tar -czvf redatam-linux.tar.gz redatam redatamgui
+          zip redatam-windows.zip redatam.exe redatamgui.exe
 
       - name: Archive binaries on macOS
         if: matrix.os == 'macos-latest'
@@ -123,7 +88,7 @@ jobs:
       - name: Download Windows binaries
         uses: actions/download-artifact@v3
         with:
-          name: windows-latest-binaries
+          name: ubuntu-22.04-binaries
           path: ./binaries/windows
 
       - name: Download macOS binaries
