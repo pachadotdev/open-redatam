@@ -32,34 +32,34 @@ nogui: $(TARGET_REDATAM)
 
 # Build redatam
 $(TARGET_REDATAM): $(OBJS) $(OBJ_DIR)/main.o
-    $(CC) $(CFLAGS) -o $@ $^ $(XERCES_FLAGS) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $^ $(XERCES_FLAGS) $(LDFLAGS)
 
 $(OBJ_DIR)/main.o: $(SRC_DIR)/main.cpp
-    @mkdir -p $(dir $@)
-    $(CC) $(CFLAGS) -c -o $@ $<
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 # Build redatam as a static library
 $(TARGET_REDATAM_LIB): $(OBJS)
-    @mkdir -p $(LIB_DIR)
-    ar rcs $(LIB_DIR)/$@ $^
+	@mkdir -p $(LIB_DIR)
+	ar rcs $(LIB_DIR)/$@ $^
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-    @mkdir -p $(dir $@)
-    $(CC) $(CFLAGS) -c -o $@ $<
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 # Build redatamgui
 $(TARGET_GUI): $(filter-out $(OBJ_DIR)/main.o, $(GUI_OBJECTS)) $(TARGET_REDATAM_LIB) $(OBJ_DIR)/gui_main.o
-    $(CC) $(filter-out $(OBJ_DIR)/main.o, $(GUI_OBJECTS)) $(OBJ_DIR)/gui_main.o -L$(LIB_DIR) -lredatam $(LDFLAGS) $(XERCES_FLAGS) -o $@
+	$(CC) $(filter-out $(OBJ_DIR)/main.o, $(GUI_OBJECTS)) $(OBJ_DIR)/gui_main.o -L$(LIB_DIR) -lredatam $(LDFLAGS) $(XERCES_FLAGS) -o $@
 
 $(OBJ_DIR)/gui_main.o: $(GUI_DIR)/main.cpp
-    @mkdir -p $(dir $@)
-    $(CC) $(CFLAGS) -c -o $@ $<
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(OBJ_DIR)/%.o: $(GUI_DIR)/%.cpp
-    @mkdir -p $(dir $@)
-    $(CC) $(CFLAGS) -c -o $@ $<
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-    rm -rf $(OBJ_DIR) $(LIB_DIR) $(TARGET_REDATAM) $(TARGET_GUI)
+	rm -rf $(OBJ_DIR) $(LIB_DIR) $(TARGET_REDATAM) $(TARGET_GUI)
 
 .PHONY: all clean nogui
